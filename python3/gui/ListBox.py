@@ -1,22 +1,30 @@
 from tkinter import * 
 
+def add_list():
+    listbox.insert(END, ent.get())
+    ent.delete(0,END)
+def del_list():
+    listbox.delete(END)
 
 root = Tk()    
 root.title("List Example") 
 root.geometry("250x300+100+100")
 root.resizable(True, False)
 
-lbl = Label(root, text = "This is simple list Example")
+frm = Frame(root)
+frm.pack(pady=10)
+
+lbl = Label(frm, text = "This is simple list Example")
 lbl.pack()
 
 
 #list box create
-listbox = Listbox(width = 25,height = 5,bg="#ffdab9",fg="#003f3f")
+listbox = Listbox(frm,width = 25,height = 5,bg="#ffdab9",fg="#003f3f")
 listbox.pack(side = LEFT,fill = BOTH)
 
 #scroolbar create
-scrBar = Scrollbar(root)
-scrBar.pack(side = LEFT, fill=BOTH)
+scrBar = Scrollbar(frm)
+scrBar.pack(side = RIGHT, fill=BOTH)
 
 #리스트 박스에서 마우스휠을 돌릴때 스크롤바 따라옴
 listbox.config(yscrollcommand=scrBar.set)
@@ -24,13 +32,15 @@ listbox.config(yscrollcommand=scrBar.set)
 scrBar.config(command=listbox.yview)
 
 
-#test list 
-test = ["sgge","14ssf3","qqrs","asdasd","asd","ss","s","a","Hello world","I am list","fuck up","born hair","song by ph1"]
-
-#insert into listbox, 테스트 리스트를 리스트박스 안으로  넣음
-for item in test:
-    listbox.insert(END,item)
 
 
+ent =Entry(width=30)
+ent.pack()
+
+btn1 = Button(text ="add", command = add_list)
+btn1.pack(side = LEFT)
+
+btn2 = Button(text ="del", command = del_list)
+btn2.pack(side = LEFT)
 
 root.mainloop()
