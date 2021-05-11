@@ -19,27 +19,25 @@ def delect(index):
     cursor.execute("DELETE FROM dataTBL WHERE ID = {0}".format(index))
 
 
-print("<1> SELECT , <2> INSERT(index,contents,do) , <3> DELETE(index)")
-print("insert 'q' -> exit")
-case = int(input("input :"))
+case = 0
 
-#while case != 'q':
-if case==1:
-    select()
-elif case == 2:
-    se_index = input("index :")
-    se_con = input("contents :")
-    insert(se_index,str(se_con),0)
-elif case == 3:
-    de_index = input("index :")
-    delect(de_index)
- #   else:
-  #      print("please select 1 or 2 or 3")
-        
+while case !=4:    
+    print("<1> SELECT , <2> INSERT(index,contents,do) , <3> DELETE(index), <4> EXIT")
+    case = int(input("input :"))
+    if case==1:
+        select()
+    elif case == 2:
+        se_index = input("index :")
+        se_con = input("contents :")
+        insert(se_index,str(se_con),0)
+    elif case == 3:
+        de_index = input("index :")
+        delect(de_index)
+    elif case == 4:
+        print("BYE")
+    else:
+        print("Error")
 
-#insert(2,"한글입력",0)
-#select()
-#delect(2)
 
 
 conn.commit()
