@@ -1,3 +1,6 @@
+#today plan : do, font change
+
+
 from tkinter import * 
 import pymysql
 
@@ -43,7 +46,49 @@ def delete():
     conn.commit()
     conn.close()
 
-root = Tk()    
+
+def cross_off():
+
+    conn = pymysql.connect(host='localhost', user='root', password='1234',db='TodoDB',charset='utf8')
+    cursor = conn.cursor()
+    
+    listbox.itemconfig(
+            listbox.curselection(),
+            fg="#fff",
+            )
+
+    index = listbox.curselection()[0]+1
+    
+    
+    cursor.execute("UPDATE dataTBL SET Do = 1 WHERE ID = {0}".format(index))
+
+    
+    conn.commit()
+    conn.close()
+
+
+
+def cross_on():
+    
+    conn = pymysql.connect(host='localhost', user='root', password='1234',db='TodoDB',charset='utf8')
+    cursor = conn.cursor()
+
+    listbox.itemconfig(
+            listbox.curselection(),
+            fg="#003300",
+            )
+    
+    index = listbox.curselection()[0]+1
+
+
+    cursor.execute("UPDATE dataTBL SET Do = 0 WHERE ID = {0}".format(index))
+
+
+    conn.commit()
+    conn.close()
+
+
+root= Tk()    
 root.title("Todolist") 
 root.geometry("250x300+100+100")
 root.resizable(True, False)
@@ -56,7 +101,7 @@ label.pack()
 
 
 #create list box 
-listbox = Listbox(box_frame,width = 25,height = 5,bg="#ffdab9",fg="#003f3f")
+listbox = Listbox(box_frame,width = 25,height = 5,bg="#ffdab9",fg="#003300")
 listbox.pack(side = LEFT,fill = BOTH)
 
 fetch()
@@ -77,19 +122,25 @@ ent.pack()
 
 
 
-ins_btn = Button(text ="insert", command = insert)
+ins_btn = Button(text ="ins", command = insert)
 ins_btn.pack()
-ins_btn.place(x=80,y=200)
+ins_btn.place(x=20,y=200)
 
 
-del_btn = Button(text ="delete", command = delete)
+del_btn = Button(text ="del", command = delete)
 del_btn.pack()
-del_btn.place(x=150,y=200)
+del_btn.place(x=70,y=200)
+
+did_btn = Button(text= "did", command = cross_off)
+did_btn.pack
+did_btn.place(x=120,y=200)
+
+yet_btn = Button(text= "yet", command = cross_on)
+yet_btn.pack
+yet_btn.place(x=170,y=200)
 
 
 root.mainloop()
-
-
 
 
 
