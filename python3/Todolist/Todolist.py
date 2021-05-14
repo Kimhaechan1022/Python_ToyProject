@@ -44,14 +44,14 @@ def delete():
     conn.close()
 
 root = Tk()    
-root.title("List Example") 
+root.title("Todolist") 
 root.geometry("250x300+100+100")
 root.resizable(True, False)
 
 box_frame = Frame(root)
 box_frame.pack(pady=10)
 
-label = Label(box_frame, text = "This is simple list Example")
+label = Label(box_frame, text = "DB : TodoDB, TABLE : dataTBL")
 label.pack()
 
 
